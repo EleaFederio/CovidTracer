@@ -8,7 +8,9 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/floating-labels/">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="<?= base_url('/public/assets/js/jquery.qrcode.min.js')?>"></script>
-<!--    instascan.min.js-->
+
+    <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js" ></script>
+    <!--    <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>-->
     <!-- JS, Popper.js, and jQuery -->
     <title>Document</title>
 </head>
@@ -27,10 +29,10 @@ $uri = service('uri');
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item <?= ($uri->getSegment(1) == 'dashboard' ? 'active' : null ) ?>" >
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="<?= base_url('people/dashboard') ?>">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item <?= ($uri->getSegment(1) == 'travel_history' ? 'active' : null ) ?>" >
-                <a class="nav-link" href="#">Travel History <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="<?= base_url('people/travel_history') ?>">Travel History <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('/logout') ?>">Logout</a>

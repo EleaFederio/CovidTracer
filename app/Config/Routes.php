@@ -36,11 +36,19 @@ $routes->match(['get', 'post'], 'people/register', 'Users::register');
 $routes->match(['get', 'post'], 'establishment/login', 'EstablishmentController::index');
 $routes->match(['get', 'post'], 'establishment/register', 'EstablishmentController::register');
 $routes->get('people/dashboard', 'Users::showDashboard');
+$routes->get('people/travel_history', 'Users::showTravelHistory');
 $routes->get('establishment/dashboard', 'EstablishmentController::showDashboard');
 $routes->get('establishment/qr_code', 'EstablishmentController::myQrCode');
 $routes->get('establishment/scanner', 'EstablishmentController::showScanner');
 $routes->get('/logout', 'Users::logout');
 $routes->get('establishment/logout', 'EstablishmentController::logout');
+$routes->post('record/this', 'TracerController::record');
+$routes->get('people/scanner', 'Users::showScanner');
+$routes->post('record/travel', 'TracerController::recordTravel');
+
+$routes->get('establishment/view_records', 'TracerController::showEstablishmentsRecord');
+$routes->get('establishment/qr_poster', 'EstablishmentController::showPoster');
+$routes->get('people/view_records', 'TracerController::showPersonRecord');
 
 /**
  * --------------------------------------------------------------------

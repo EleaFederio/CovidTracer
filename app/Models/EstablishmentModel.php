@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 class EstablishmentModel extends Model{
 
     protected $table = 'establishments';
-    protected $allowedFields = [ 'id', 'name', 'phone_number', 'town', 'barangay', 'location_details', 'establishment_id', 'details'];
+    protected $allowedFields = [ 'id', 'name', 'phone_number', 'town', 'barangay', 'location_details', 'establishment_id', 'details', 'password'];
     protected $beforeInsert = ['beforeInsert'];
     protected $beforeUpdate= ['beforeUpdate'];
 

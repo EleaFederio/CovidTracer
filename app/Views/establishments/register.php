@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="<?= base_url('/public/assets/css/style.css') ?>">
-<form class="form-signin" action="<?= base_url('/establishment/register')?>" method="POST">
+<form class="form-signin" action="<?= base_url('/establishment/register')?>" method="POST" autocomplete="off">
     <div class="text-center mb-4">
         <h1 class="h3 mb-3 font-weight-normal">Covid Tracker</h1>
         <img class="mb-4" src="https://www.uokpl.rs/fpng/f/409-4098523_corona-virus-logo.png" alt="" width="72" height="72">

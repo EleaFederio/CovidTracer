@@ -21,7 +21,7 @@ class App extends BaseConfig
 	| environments.
 	|
 	*/
-	public $baseURL = 'http://192.168.0.117/tracker/';
+	public $baseURL = 'http://10.0.0.25/tracker2';
 
 	/*
 	|--------------------------------------------------------------------------

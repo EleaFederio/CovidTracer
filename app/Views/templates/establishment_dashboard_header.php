@@ -10,6 +10,7 @@
     <script src="<?= base_url('/public/assets/js/jquery.qrcode.min.js')?>"></script>
 
     <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js" ></script>
+    <!--    <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>-->
     <!-- JS, Popper.js, and jQuery -->
     <title>Document</title>
 </head>

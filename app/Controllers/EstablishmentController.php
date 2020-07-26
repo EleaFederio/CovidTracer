@@ -1,11 +1,14 @@
 <?php namespace App\Controllers;
 
 use App\Models\EstablishmentModel;
+use App\Models\TravelHistoryModel;
 use Carbon\Carbon;
 use App\Models\UserModel;
 
 class EstablishmentController extends BaseController
 {
+
+
     public function index()
     {
         $data = [];
@@ -14,12 +17,12 @@ class EstablishmentController extends BaseController
         if ($this->request->getMethod() == 'post'){
             $rules = [
                 'phoneNumber' => 'required',
-                'password' => 'required|min_length[8]|validateUser[phoneNumber, password]',
+                'password' => 'required|min_length[8]|validateEstablishment[phoneNumber, password]',
             ];
 
             $errors = [
                 'password' => [
-                    'validateUser' => 'Phone Number or Password don\'t match'
+                    'validateEstablishment' => 'Phone Number or Password don\'t match'
                 ]
             ];
 
@@ -27,7 +30,6 @@ class EstablishmentController extends BaseController
                 $data['validation'] = $this->validator;
             }else{
                 $establishmentModel = new EstablishmentModel();
-
                 $establishmentModel = $establishmentModel->where('phone_number', $this->request->getVar('phoneNumber'))->first();
 
                 $this->setUserMethod($establishmentModel);
@@ -46,8 +48,13 @@ class EstablishmentController extends BaseController
         if (session()->get('isLoggedIn') == null){
             return redirect()->to('/login');
         }
+
+        $travelHistory = new TravelHistoryModel();
+        $travelHistories['travelHistories'] = $travelHistory->join('persons', 'travel_history.person_id = persons.id')->where('establishment_id', session()->get('id'))->findAll();
+
+
         echo view('templates/establishment_dashboard_header', $data);
-        echo view('establishments/dashboard', $data);
+        echo view('establishments/dashboard', $travelHistories);
         echo view('templates/footer', $data);
     }
 
@@ -133,13 +140,17 @@ class EstablishmentController extends BaseController
                 $establishmentModel->save($newData);
                 $session = session();
                 $session->setFlashdata('success', 'Successful Registration');
-                return redirect()->to('establishment/login');
+                return redirect()->to(base_url('establishment/login'));
             }
         }
 
         echo view('templates/header', $data);
         echo view('establishments/register', $data);
         echo view('templates/footer', $data);
+    }
+
+    public function showPoster(){
+        echo view('establishments/qr_poster');
     }
 
     //--------------------------------------------------------------------

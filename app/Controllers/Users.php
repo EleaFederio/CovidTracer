@@ -1,7 +1,9 @@
 <?php namespace App\Controllers;
 
+use App\Models\TravelHistoryModel;
 use Carbon\Carbon;
 use App\Models\UserModel;
+use http\Url;
 
 class Users extends BaseController
 {
@@ -39,14 +41,46 @@ class Users extends BaseController
         echo view('templates/footer', $data);
 	}
 
-	public function showDashboard(){
+    public function showDashboard(){
+        $data = [];
+        helper(['form']);
+        if (session()->get('isLoggedIn') == null){
+            return redirect()->to('/login');
+        }
+
+        $travelHistory = new TravelHistoryModel();
+        $travelHistories['travelHistories'] = $travelHistory->join('establishments', 'travel_history.establishment_id = establishments.id')->where('person_id', $travelHistory->id)->findAll();
+
+
+        echo view('templates/dashboard_header', $data);
+        echo view('people/dashboard', $travelHistories);
+        echo view('templates/footer', $data);
+    }
+
+    public function showTravelHistory(){
+        $data = [];
+        helper(['form']);
+        if (session()->get('isLoggedIn') == null){
+            return redirect()->to('/login');
+        }
+
+        $travelHistory = new TravelHistoryModel();
+        $travelHistories['travelHistories'] = $travelHistory->join('establishments', 'travel_history.establishment_id = establishments.id')->where('person_id', session()->get('id'))->findAll();
+
+
+        echo view('templates/dashboard_header', $data);
+        echo view('people/travel_history', $travelHistories);
+        echo view('templates/footer', $data);
+    }
+
+    public function showScanner(){
         $data = [];
         helper(['form']);
         if (session()->get('isLoggedIn') == null){
             return redirect()->to('/login');
         }
         echo view('templates/dashboard_header', $data);
-        echo view('people/dashboard', $data);
+        echo view('people/scanner', $data);
         echo view('templates/footer', $data);
     }
 
@@ -114,7 +148,7 @@ class Users extends BaseController
                 $userModel->save($newData);
                 $session = session();
                 $session->setFlashdata('success', 'Successful Registration');
-                return redirect()->to('/login');
+                return redirect()->to(base_url('people/login'));
             }
         }
 

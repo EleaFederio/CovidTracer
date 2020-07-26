@@ -6,31 +6,24 @@
     <br>
     <h4 class="h4 text-center">Today's Visitors</h4><br>
 
+
     <table class="table">
         <thead class="thead-dark">
         <tr>
             <th scope="col">Name</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Address</th>
         </tr>
         </thead>
         <tbody>
+        <?php foreach ($travelHistories as $key => $value) :?>
         <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+            <td><?php echo $value['first_name'].' '.$value['last_name'] ?></td>
+            <td><?php echo $value['location_details'].', '.$value['barangay'].', '.$value['town']?></td>
         </tr>
-        <tr>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-        </tr>
+        <?php endforeach; ?>
         </tbody>
     </table>
+
+
 
 </div>
